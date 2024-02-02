@@ -110,13 +110,15 @@
 						</td>
 					</tr>
 				</table>
-				<div class="ms-5 w-75">
-					<label class="mb-3"><strong>Diagnóstico</strong></label>
-					<textarea class="form-control" id="" cols="30" rows="4" v-model="diagnostico"></textarea>
-				</div>
-				<div class="ms-5 w-75">
-					<label class="mb-3"><strong>Tratamiento</strong></label>
-					<textarea class="form-control" id="" cols="30" rows="4" v-model="tratamiento"></textarea>
+				<div class="row row-cols-2">
+					<div class="col">
+						<label class="mb-3"><strong>Diagnóstico</strong></label>
+						<textarea class="form-control" id="" cols="30" rows="4" v-model="diagnostico"></textarea>
+					</div>
+					<div class="col">
+						<label class="mb-3"><strong>Tratamiento</strong></label>
+						<textarea class="form-control" id="" cols="30" rows="4" v-model="tratamiento"></textarea>
+					</div>
 				</div>
 			</div>
 		</div>
