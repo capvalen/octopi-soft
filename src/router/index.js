@@ -18,11 +18,6 @@ const routes = [
 		path: '/clientes/receta-lentes/:idCliente',
 		name:'recetaLentes',
 		component: RecetaLentes
-	},
-	{
-		path: '/receta/pdf/',
-		name:'recetaPDF',
-		component: () => import( '../components/Recetas/PDF.vue'),
 	}
 ]
 

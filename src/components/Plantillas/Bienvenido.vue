@@ -1,7 +1,7 @@
 <template lang="">
 	<div>
-		<h1>Bienvenido a Octopi Softw.</h1>
-		<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rerum ab quibusdam at voluptatibus! Possimus repellendus facere labore? Quas obcaecati, consequuntur omnis quo quis, aperiam necessitatibus eligendi sint, dolore amet odit.</p>
+		<h1>Bienvenido a Vega visión.</h1>
+		<p>Use el panel lateral para ingresar sus datos.</p>
 	</div>
 </template>
 <script>

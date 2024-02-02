@@ -31,8 +31,9 @@
 					<td>{{cliente.celular}} </td>
 					<td>{{cliente.direccion}} </td>
 					<td class="d-grid d-md-block">
+						<button class="btn btn-sm btn-outline-warning mx-1" title="Ver medidas anteriores" data-bs-toggle="modal" data-bs-target="#modalAnteriores" @click="verAnteriores(cliente.id)"><i class="bi bi-card-checklist"></i></button>
 						<button class="btn btn-sm btn-outline-secondary mx-1" title="Registrar medidas" @click="irAReceta(cliente.id)"><i class="bi bi-eyeglasses"></i></button>
-						<button class="btn btn-sm btn-outline-primary mx-1" data-bs-toggle="offcanvas" href="#offNuevoCliente" @click="editarCliente(cliente)"><i class="bi bi-feather"></i></button>
+						<button class="btn btn-sm btn-outline-primary mx-1" data-bs-toggle="offcanvas" href="#offNuevoCliente" @click="editarCliente(cliente)" title="Editar"><i class="bi bi-feather"></i></button>
 						<button class="btn btn-sm btn-outline-danger mx-1" @click="eliminarCliente(cliente.id)"><i class="bi bi-trash2"></i></button>
 					</td>
 				</tr>
@@ -41,18 +42,20 @@
 		<p v-if="clientes.length==0">No hay clientes registrados aún</p>
 	</div>
 	<offNuevoCliente @actualizarLista="actualizarLista()" :clienteEditar="cliente"></offNuevoCliente>
+	<MedidasAnteriores :anteriores="anteriores"></MedidasAnteriores>
 </template>
 <script >
 import offNuevoCliente from './NuevoCliente.vue'
+import MedidasAnteriores from './MedidasAnteriores.vue'
 export default {
 	name: 'Clientes',
 	data() {
 		return {
-			texto:'', clientes:[], cliente:[]
+			texto:'', clientes:[], cliente:[], anteriores:[]
 		}
 	},
 	components: {
-		offNuevoCliente,
+		offNuevoCliente,MedidasAnteriores,
 	},
 	methods: {
 		actualizarLista(){ this.cargarDatos(); },
@@ -87,6 +90,15 @@ export default {
 				this.axios.post(this.servidor+ 'Clientes.php', datos)
 				.then(()=> this.actualizarLista() )
 			}
+		},
+		verAnteriores(idCliente){
+			let datos =  new FormData();
+			datos.append('pedir', 'medidasAnteriores')
+			datos.append('idCliente', idCliente)
+			this.axios.post(this.servidor +'Receta.php', datos)
+			.then((response) => {
+				this.anteriores = response.data;
+			});
 		},
 		irAReceta(id){ this.$router.push({ name: 'recetaLentes', params: { idCliente:id } }); }
 	},

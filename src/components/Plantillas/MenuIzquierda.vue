@@ -4,7 +4,7 @@
 		<div class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary" style="width: 280px;">
 			<a href="/" class=" mb-3 mb-md-0  link-body-emphasis text-decoration-none">
 				<img src="@/assets/logo.jpg" class="img-fluid">
-				<p class="text-center"><span class="fs-4">Octopi Softw.</span></p>
+				<p class="text-center"><span class="fs-4">Vega Visión</span></p>
 			</a>
 			<hr>
 			<ul class="nav nav-pills flex-column mb-auto">

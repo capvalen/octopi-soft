@@ -114,6 +114,10 @@
 					<label class="mb-3"><strong>Diagnóstico</strong></label>
 					<textarea class="form-control" id="" cols="30" rows="4" v-model="diagnostico"></textarea>
 				</div>
+				<div class="ms-5 w-75">
+					<label class="mb-3"><strong>Tratamiento</strong></label>
+					<textarea class="form-control" id="" cols="30" rows="4" v-model="tratamiento"></textarea>
+				</div>
 			</div>
 		</div>
 		<div class="my-4">
@@ -125,16 +129,34 @@
 		<h1>Receta de cliente: </h1>
 		<p>No existe un paciente válido</p>
 	</div>
+	<div class="modal fade" id="modalBien" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="exampleModalLabel">Receta guardada</h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<h5>Su receta fue registrada exitósamente</h5>
+					<p>¿Qué desea hacer?</p>
+					<button class="btn btn-outline-success" @click="irAPDF()" >Ver el PDF de la receta</button><br>
+					<button class="mt-2 btn btn-outline-secondary" @click="idAClientes()">Ir al panel de clientes</button>
+				</div>
+				
+			</div>
+		</div>
+	</div>
 </template>
 <script>
 import moment from 'moment'
+
 export default {
 	name: 'RecetaLentes',
 	data() {
 		return {
 			cliente:[],
 			lejos:{odEsfera: '', odCilindro: '', odEje: '', odAv: '', odDip: '', odPrisma: '', oiEsfera: '',oiCilindro: '',oiEje: '',oiAv: '',oiDip: '',oiPrisma: '' },
-			cerca:{odEsfera: '', odCilindro: '', odEje: '', odAv: '', odDip: '', odPrisma: '', oiEsfera: '',oiCilindro: '',oiEje: '',oiAv: '',oiDip: '',oiPrisma: ''}, diagnostico:[]
+			cerca:{odEsfera: '', odCilindro: '', odEje: '', odAv: '', odDip: '', odPrisma: '', oiEsfera: '',oiCilindro: '',oiEje: '',oiAv: '',oiDip: '',oiPrisma: ''}, diagnostico:'', tratamiento:'', id:-1,
 		}
 	},
 	mounted(){
@@ -156,15 +178,27 @@ export default {
 			datos.append('idCliente', this.$route.params.idCliente)
 			datos.append('lejos', JSON.stringify(this.lejos))
 			datos.append('cerca', JSON.stringify(this.cerca))
-			datos.append('diagnostico', JSON.stringify(this.diagnostico))
+			datos.append('diagnostico', this.diagnostico)
+			datos.append('tratamiento', this.tratamiento)
 			this.axios.post(this.servidor +'Receta.php', datos)
 			.then((resp) => {
 				if(resp.data.mensaje == 'ok'){
-					this.$router.push({ name: 'receta', params:{idReceta: resp.data.id} })
+					//this.$router.push({ name: 'receta', params:{idReceta: resp.data.id} })
+					this.id = resp.data.id
+					window.$('#modalBien').modal('show')
+
+					//this.$.modal(".modal");
 				}else
 					alert('Hubo un error, inténtelo más tarde')
 			});
 
+		},
+		irAPDF(){
+			window.open('http://localhost/vegavision/api/impresion.php?idReceta=' + this.id, '_blank');
+		},
+		idAClientes(){
+			window.$('#modalBien').modal('hide')
+			this.$router.push({ name: 'clientes'})
 		}
 	},
 	computed: {

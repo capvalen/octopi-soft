@@ -68,14 +68,19 @@ export default {
 		},
 	},
 	watch:{
-		'clienteEditar'(newValue){ 
-			this.cliente.id = newValue.id
-			this.cliente.nombres = newValue.nombres
-			this.cliente.apellidos = newValue.apellidos
-			this.cliente.dni = newValue.dni
-			this.cliente.celular = newValue.celular
-			this.cliente.sexo = newValue.sexo
-			this.cliente.fechaNacimiento = newValue.fechaNacimiento
+		'clienteEditar'(newValue){
+			console.log('newValue', newValue)
+			if(this.clienteEditar.id){
+				this.cliente.id = newValue.id
+				this.cliente.nombres = newValue.nombres
+				this.cliente.apellidos = newValue.apellidos
+				this.cliente.dni = newValue.dni
+				this.cliente.celular = newValue.celular
+				this.cliente.sexo = newValue.sexo
+				this.cliente.fechaNacimiento = newValue.fechaNacimiento
+			}else{
+				this.cliente.id=-1
+			}
 		}
 	}
 }
