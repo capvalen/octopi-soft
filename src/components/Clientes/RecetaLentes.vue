@@ -9,6 +9,9 @@
 					<p><strong>Apellidos y nombres: </strong> <span class="text-capitalize">{{cliente.apellidos}} {{ cliente.nombres }}</span></p>
 					<p><strong>Edad:</strong> <span>{{edad}} años</span></p>
 				</div>
+				<div class="my-4">
+					<button class="btn btn-outline-primary" @click="crearReceta()"><i class="bi bi-send-plus"></i> Registrar receta de lentes</button>
+				</div>
 				<table class="table ">
 					<tr class="">
 						<td class="" colspan="2"></td>
@@ -122,9 +125,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="my-4">
-			<button class="btn btn-outline-primary" @click="crearReceta()"><i class="bi bi-send-plus"></i> Registrar receta de lentes</button>
-		</div>
+		
 
 	</div>
 	<div v-else>
